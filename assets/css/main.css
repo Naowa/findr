@@ -1,0 +1,28 @@
+#title {
+    text-align: center;
+    color: #ffffff;
+    padding: 10px;
+}
+
+#credentials {
+    position: fixed;
+    top: 0;
+    background-color: #1b1b1b;
+    width: 100%
+}
+
+#right-side1 {
+    float: right;
+}
+
+#right-side2 {
+    float: right;
+}
+
+main {
+    text-align: center;
+}
+
+.dropdown-menu {
+    background-color: #1b1b1b;
+}
