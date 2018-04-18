@@ -7,5 +7,18 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <hr>
+    <form>
+      <p>First Name: 
+        <input id="firstName" type="text" name="firstname">
+      </p>
+      <p>Last Name:
+        <input id="lastName" type="text" name="lastname">
+      </p>
+    </form>
+    <button id="update_button">update</button>
+    <button id="logout_button">logout</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

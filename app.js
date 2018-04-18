@@ -8,6 +8,7 @@ var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var restaurantRouter = require('./routes/restaurant');
 
 var app = express();
 
@@ -15,7 +16,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(session({secret: 'wowasecret', cookie: {maxAge: 60000}}))
+app.use(session({secret: 'wowasecret', cookie: {maxAge: 6000000000}}))
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -46,6 +47,7 @@ app.get('/session', function(req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/restaurant', restaurantRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

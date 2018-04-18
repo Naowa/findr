@@ -5,7 +5,10 @@ var UserModel = mongoose.model('User', {
         type: String,
         unique: true
     },
-    password: String
+    password: String,
+    salt: String,
+    firstName: String,
+    lastName: String,
 });
 
 module.exports = UserModel
