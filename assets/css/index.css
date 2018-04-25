@@ -1,0 +1,36 @@
+#profile {
+  display: none;
+}
+
+nav .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
+}
+
+nav img {
+  width: 20%;
+  height: 20%;
+}
+
+#logo {
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#controls img {
+  width: 5%;
+  height: 5%;
+}
+
+#main-img {
+  width: 50%;
+  height: 50%;
+}

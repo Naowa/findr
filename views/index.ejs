@@ -2,22 +2,54 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/index.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <nav>
+        <div class="grid-container">
+            <div id="profile-icon" class="grid-item">
+                <img src="/images/profile-icon.svg">    
+            </div>
+            <div id="logo" class="grid-item">
+                <img src="/images/logo46.svg">    
+            </div>
+            <div id="fave-icon" class="grid-item">
+                <img src="/images/favorite-heart-button.svg">    
+            </div>
+        </div>
+        <hr>
+    </nav>
+
+    <div id="app">
+      <div id="main-space">
+        <img id="main-img">
+        <div id="controls"><img id="dislike" src="/images/dislike.svg"> <img id="like" src="/images/like.svg"></div>
+      </div>
+    </div>
+
+    <div id="profile">
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+      <hr>
+      <form>
+        <p>First Name: 
+          <input id="firstName" type="text" name="firstname">
+        </p>
+        <p>Last Name:
+          <input id="lastName" type="text" name="lastname">
+        </p>
+      </form>
+      <button id="update_button">update</button>
+      <button id="logout_button">logout</button>
+    </div>
+
+    <div id="faves">
+
+    </div>
+
     <hr>
-    <form>
-      <p>First Name: 
-        <input id="firstName" type="text" name="firstname">
-      </p>
-      <p>Last Name:
-        <input id="lastName" type="text" name="lastname">
-      </p>
-    </form>
-    <button id="update_button">update</button>
-    <button id="logout_button">logout</button>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/js/index.js"></script>
   </body>
