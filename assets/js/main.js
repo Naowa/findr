@@ -25,7 +25,20 @@ $(document).ready(function () {
             method: 'POST',
             data: {email: $("#register_email").val(), password: $("#register_pass").val()}
         }).done(function(data) {
-            console.log(data);
+            $.ajax ({
+                url: '/users/login',
+                method: 'POST',
+                data: {email: $("#register_email").val(), password: $("#register_pass").val()},
+            }).done(function(data) {
+                // console.log(data)
+                if (data != "no_cookie") {
+                //     console.log(data);
+                    window.location.assign('http://localhost:3000/');
+                 }
+            })
+            .fail(function(xqXHR, textStatus) {
+                alert(xqXHR.responseText)
+            })
         }).fail(function(xqXHR, textStatus) {
             alert(xqXHR.responseText);
         })

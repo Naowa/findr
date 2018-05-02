@@ -8,18 +8,25 @@ $(document).ready(function () {
     }).done(function(data){
         $('#firstName').val(data.firstName);
         $('#lastName').val(data.lastName);
+        if (data.premium) $('#sub').prop('checked', true);
+        else $('#sub').prop('checked', false);
     }).fail(function(xqXHR, textStatus) {
         window.location.assign("http://localhost:3000/fndr");
     })
 
-    $.ajax({
-        url: '/restaurant/suggestions',
-        method: 'GET',
-    }).done(function(data) {
-        imgs = data;
-        img_len = data.length - 1;
-        $('#main-img').attr('src', imgs[img_len--].image);
-    });
+    function display_main() {
+        $.ajax({
+            url: '/restaurant/suggestions',
+            method: 'GET',
+        }).done(function(data) {
+            console.log(data);
+            imgs = data;
+            img_len = data.length - 1;
+            $('#main-img').attr('src', imgs[img_len--].image);
+        });
+    }
+
+    display_main();
 
     function next_img(like) {
         if (like) {
@@ -28,6 +35,8 @@ $(document).ready(function () {
                 url: '/restaurant/likes',
                 method: 'POST',
                 data: { image_url: imgs[img_len + 1].image, restaurant_id: imgs[img_len + 1].restaurant_id}
+            }).fail(function(xqXHR, textStatus) {
+                alert(xqXHR.responseText);
             });
         }
         if (img_len < 0) {
@@ -54,11 +63,11 @@ $(document).ready(function () {
         let name = $("<h2></h2>").text(like.restaurant_id.name);
         let foodimg = name.append($("<img>").attr('src', like.image_url)
             .css({'align': 'left', 'display': 'inline-block', 'width': '5%', 'height': '5%'}));
-        let url = $("<p></p>").text(like.restaurant_id.url);
+        let url = $("<a></a>").attr("href", like.restaurant_id.url).text("Link");
         let unlike = $("<img>").attr('src', '/images/dislike.svg').attr('id', index)
             .css({'align': 'right', 'display': 'inline-block', 'width': '5%', 'height': '5%'});
 
-        $('#faves').append(name, foodimg, url, unlike);
+        $('#faves').append(name, foodimg, url, unlike, "<hr>");
 
         $('#' + index).click(function(event) {
             event.preventDefault();
@@ -77,7 +86,7 @@ $(document).ready(function () {
         $.ajax ({
             url: '/users/',
             method: 'PATCH',
-            data: {firstName: $("#firstName").val(), lastName: $("#lastName").val()}
+            data: {firstName: $("#firstName").val(), lastName: $("#lastName").val(), premium: $('#sub').is(":checked")}
         }).done(function(data) {
             alert('Profile Updated');
         }).fail(function(xqXHR, textStatus) {
@@ -111,5 +120,20 @@ $(document).ready(function () {
         $("#app").hide();
         $("#profile").hide();
         $("#faves").show();
+    })
+
+    $("#profile-icon").click(function(event){
+        event.preventDefault();
+        $("#faves").hide();
+        $("#app").hide();
+        $("#profile").show();
+    })
+
+    $("#logo").click(function(event){
+        event.preventDefault();
+        $("#faves").hide();
+        $("#profile").hide();
+        $("#app").show();
+        display_main();
     })
 });

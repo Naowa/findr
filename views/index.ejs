@@ -7,13 +7,13 @@
   <body>
     <nav>
         <div class="grid-container">
-            <div id="profile-icon" class="grid-item">
+            <div class="point" id="profile-icon" class="grid-item">
                 <img src="/images/profile-icon.svg">    
             </div>
-            <div id="logo" class="grid-item">
+            <div class="point" id="logo" class="grid-item">
                 <img src="/images/logo46.svg">    
             </div>
-            <div id="fave-icon" class="grid-item">
+            <div class="point" id="fave-icon" class="grid-item">
                 <img src="/images/favorite-heart-button.svg">    
             </div>
         </div>
@@ -38,6 +38,15 @@
         <p>Last Name:
           <input id="lastName" type="text" name="lastname">
         </p>
+        <p>Subscription: </p>
+        Free
+        <label class="switch">
+          
+          <input id="sub" type="checkbox">
+          <span class="slider"></span>
+          
+        </label>
+        Premium
       </form>
       <button id="update_button">update</button>
       <button id="logout_button">logout</button>

@@ -7,6 +7,7 @@ var axios = require('axios');
 
 var RestaurantModel = models.Restaurant;
 var LikeModel = models.Likes;
+var UserModel = models.Users;
 
 router.get('/search', function (req, res, next) {
     let apiKey = 'z0NtsT7FSMqGMhpL4_pxXIXA7wDrUx-1UmLxKMIUzr3dgIBn-DLNw6JsfImoitqVgRxFvHnTjCtzXsyia9QgYi4Twj7P-ahlRkcKvTXe9Tx0DO2tv6EhPHhxEeLUWnYx'
@@ -57,8 +58,40 @@ router.get('/suggestions', function(req, res, next) {
     });
 });
 
-router.post('/likes', function(req, res, next) {
-    let  body = req.body;
+const determineLimit = (req,res,next) => {
+    let session = req.session;
+    let email = session.email;
+    UserModel.findOne({'email': email}).then((person) => { 
+        if  (!person.premium) {
+            LikeModel.find({}).then((response) => {
+                let likeCount = 0;
+                response.forEach(function(like) {
+                    let likeDate = new Date(like.createdAt);
+                    let nowDate = new Date();
+                    if (likeDate.getFullYear() == nowDate.getFullYear()
+                        && likeDate.getMonth() == nowDate.getMonth()
+                        && likeDate.getDate() == nowDate.getDate()) {
+                            ++likeCount;
+                        }
+                })
+                if (likeCount >= 10) {
+                    res.status(402).send(`Payment Required. Please purchase premium subscription to like more
+                    than 10 restaurants`);
+                }
+                else {
+                    next();
+                }
+            })
+        }
+        else {
+            next();
+        }
+    
+    })
+}
+
+router.post('/likes', determineLimit, function(req, res, next) {
+    let body = req.body;
     let image = body.image_url;
     let session = req.session;
     let email = session.email;
@@ -68,6 +101,7 @@ router.post('/likes', function(req, res, next) {
         email: email,
         restaurant_id: restaurant
     });
+    res.send(200);
 });
 
 router.get('/likes', function(req, res, next) {

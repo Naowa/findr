@@ -101,12 +101,14 @@ router.get('/profile', function(req, res, next) {
   var data = {
     firstName: "",
     lastName: "",
+    premium: ""
   }
   if (req.session.email) {
     UserModel.findOne({ email: req.session.email}).then((person) => {
       console.log(person);
       data.firstName = person.firstName;
       data.lastName = person.lastName;
+      data.premium = person.premium;
       res.status(200).send(data);
     })
   }
@@ -121,6 +123,7 @@ router.patch('/', function(req, res, next) {
       }
       person.firstName = req.body.firstName;
       person.lastName = req.body.lastName;
+      person.premium = req.body.premium;
       // UserModel.update({ email: req.session.email}, {
       //   firstName: req.body.firstName,
       //   lastName: req.body.lastName,

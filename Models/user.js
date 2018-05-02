@@ -9,6 +9,10 @@ var UserModel = mongoose.model('User', {
     salt: String,
     firstName: String,
     lastName: String,
+    premium: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = UserModel

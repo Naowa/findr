@@ -27,3 +27,11 @@ main {
     background-color: #1b1b1b;
 }
 
+.white {
+    text-decoration-color: white;
+}
+
+.butt {
+    cursor: pointer;
+}
+
